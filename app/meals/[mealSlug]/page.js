@@ -1,7 +1,12 @@
 import Image from "next/image";
 import classes from "./page.module.css";
+import { getMeal } from "@/lib/meals";
 
-export default function MealDetailsPage() {
+export default async function MealDetailsPage({ params }) {
+  const { mealSlug } = await params;
+  const meal = getMeal(mealSlug);
+  console.log(meal);
+
   return (
     <>
       <header className={classes.header}>
@@ -9,7 +14,7 @@ export default function MealDetailsPage() {
           <Image fill />
         </div>
         <div className={classes.headerText}>
-          <h1>TITLE</h1>
+          <h1>{meal.title}</h1>
           <p className={classes.creator}>
             by <a href={`mailto:${"EMAIL"}`}>NAME</a>
           </p>
